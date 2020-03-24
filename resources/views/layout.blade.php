@@ -7,6 +7,10 @@
     <title>Document</title>
 </head>
 <body>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/contact">Contact</a></li>
+</ul>
 @yield('content')
 </body>
 </html>

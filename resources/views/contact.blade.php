@@ -1,7 +1,8 @@
 @extends('layout')
 
 @section('content')
-well
+<h1>Content</h1>
+<p>Hello This is content!</p>
 @endsection
 
 
