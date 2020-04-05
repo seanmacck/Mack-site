@@ -1,9 +1,13 @@
 @extends('layout')
 
 @section('content')
-@foreach ($posts as $post)
+@forelse ($posts as $post)
 <p>
-    <h3> {{ $post->title }} </h3>
+    <h3>
+        <a href=" {{ route('posts.show', ['post' => $post->id]) }}">{{ $post->title }} </h3>
 </p>
-@endforeach
+@empty
+<p>No Blog posts yet!</p>
+
+@endforelse
 @endsection('content')
