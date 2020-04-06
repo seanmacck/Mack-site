@@ -35,9 +35,16 @@ class PostController extends Controller
        return view('posts.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-       dd('ok');
+       $blogPost = new BlogPost();
+       $title = $request->input('title');
+       $content = $request->input('content');
+       $blogPost->save();
+
+       //dd($title, $content);
+       return redirect()->route('posts.show', ['post' => $blogPost->id]);
+
     }
 
 }
