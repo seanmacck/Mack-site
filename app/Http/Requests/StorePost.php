@@ -26,7 +26,7 @@ class StorePost extends FormRequest
         return [
                                                                     // validation for creating content
                 'title' => 'bail|min:5|required|max:100',          // validation rules
-                'content' => 'required|min:10'
+                'content' => 'min:10|bail|required|'
 
         ];
     }

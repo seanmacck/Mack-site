@@ -40,17 +40,9 @@ class PostController extends Controller
     {
       //dd($request->all());
 
-      $validatedData = $request->validated();
-
-      dd($validatedData);
-
-       $blogPost = new BlogPost();
-
-       $blogPost->title = $request->input('title');
-       $blogPost->content = $request->input('content');
-       $blogPost->save();
-
-       $request->session()->flash('status', 'Blog Post was created!');
+      $validatedData = $request->validated();                             // validates data
+      $blogPost = BlogPost::create($validatedData);
+      $request->session()->flash('status', 'Blog Post was created!');
        //dd('ok');
        //dd($title, $content);
        return redirect()->route('posts.show', ['post' => $blogPost->id]);
