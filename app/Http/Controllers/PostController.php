@@ -32,21 +32,22 @@ class PostController extends Controller
 
     public function create()
     {
+        //$request->session()->reflash();                To display a message, if something was created or not!
        return view('posts.create');
     }
 
     public function store(Request $request)
     {
-        dd($request->all());
-       //$blogPost = new BlogPost();
-       //$title = $request->input('title');
-       //$content = $request->input('content');
-       //$blogPost->save();
+      //dd($request->all());
+       $blogPost = new BlogPost();
+       $blogPost->title = $request->input('title');
+       $blogPost->content = $request->input('content');
+       $blogPost->save();
 
-       //$request->session()->flash('status', 'Blog Post was created!');
-       dd('ok');
+       $request->session()->flash('status', 'Blog Post was created!');
+       //dd('ok');
        //dd($title, $content);
-       //return redirect()->route('posts.show', ['post' => $blogPost->id]);
+       return redirect()->route('posts.show', ['post' => $blogPost->id]);
 
     }
 
