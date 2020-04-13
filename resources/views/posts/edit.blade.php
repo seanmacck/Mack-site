@@ -1,8 +1,9 @@
 @extends('layout')
 
 @section('content')
-<form method="POST" action="{{ route('posts.store') }}">
-<input type="hidden" name="_method" value="PUT">
+<form method="POST"
+      action="{{ route('posts.update' ['post' => $post->id]) }}">
+@method('PUT')
 @csrf
 
 <p>

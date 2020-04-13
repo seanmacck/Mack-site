@@ -49,15 +49,14 @@ class PostController extends Controller
 
     }
 
-    //public function edit($id)
-    //{
-        //$post = BlogPost::find($id);
-        //find the article associated with the id.
-        //return view('posts.edit', compact('post'));                      //returns view of blogpost in database
-    //}
+    public function edit($id)
+    {
+        $post = BlogPost::findOrFail($id);
+        return view('posts.edit', ['post' => $post]);                      //returns view of blogpost in database
+    }
 
-    //public function update($id)
-    //{
+    public function update($id)
+    {
         //$post = BlogPost::find($id);
 
        //$blogPost = new BlogPost();
@@ -66,5 +65,5 @@ class PostController extends Controller
        //$blogPost->save();
 
        //return redirect('/posts/' . $post->id);                             //changes 'POST' request to 'PUT', look at edit.blade.php
-    //}
+    }
 }
