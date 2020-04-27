@@ -55,15 +55,28 @@ class PostController extends Controller
         return view('posts.edit', ['post' => $post]);                      //returns view of blogpost in database
     }
 
-    public function update($id)
+    public function update(StorePost $request, $id)
     {
-        //$post = BlogPost::find($id);
+        $post = BlogPost::find($id);
+        $validatedData = $request->validated();
 
-       //$blogPost = new BlogPost();
-       //$title = $request->input('title');
-       //$content = $request->input('content');
-       //$blogPost->save();
+        $post->fill($validatedData);
+        $post->save();
+        $request->session()->flash('status', 'Blog post was updated!');
 
-       //return redirect('/posts/' . $post->id);                             //changes 'POST' request to 'PUT', look at edit.blade.php
+        return redirect()->route('posts.show', ['post' => $post->id]);
+
+
+    }
+
+    public function destroy(Request $request, $id)
+    {
+       $post = BlogPost::findOrFail($id);
+       $post->delete();
+
+       $request->session()->flash('status', 'Blog post was deleted');
+
+       return redirect()->route('posts.index', ['post' => $post->id]);
+
     }
 }
