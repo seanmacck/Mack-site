@@ -36,3 +36,8 @@ Route::resource('/posts', 'PostController');
 //Route::get('/blog-post/{id}/{welcome?}', 'HomeController@blogPost')->name('blog-post');
 
 
+
+
+//Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');
