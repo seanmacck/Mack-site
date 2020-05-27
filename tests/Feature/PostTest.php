@@ -52,22 +52,58 @@ class PostTest extends TestCase
             $this->assertEquals(session('status'), 'Blog Post was created!');
         }
 
-        public function testStoreFail()
+        //public function testStoreFail()
+        //{
+          //  $params = [
+            //    'title' => 'x',
+              //  'content' => 'x'
+            //];
+
+            //$this->post('/posts', $params)
+            //->assertStatus(302)
+            //->assertSessionHas('errors');
+
+           // $messages = session('errors');
+            //dd($messages->getMessages());
+
+            //$this->assertEquals($messages['title'][0], 'validation.min.string');
+            //$this->assertEquals($messages['content'][1], 'validation.min.string');
+
+
+
+        //}
+
+        public function testUpdateValid()
         {
-            $params = [
-                'title' => 'x',
-                'content' => 'x'
-            ];
+            $post = new BlogPost();
+            $post->title = 'New Title';
+            $post->content = 'Content of the blog post';
+            $post->save();
 
-            $this->post('/posts', $params)
-            ->assertStatus(302)
-            ->assertSessionHas('errors');
-
-            $messages = session('errors');
-            dd($messages->getMessages());
+            $this->assertDatabaseHas('blog_posts', $post->toArray());
+        }
 
 
+        public function testDelete()
+        {
+            $post = $this->createDummyBlogPost();
+            $this->delete("/posts/{$post->id}")
+                 ->assertStatus(302)
+                 ->assertSessionHas('status');
 
         }
+
+        private function createDummyBlogPost(): BlogPost
+        {
+            $post = new BlogPost();
+            $post->title = 'New Title';
+            $post->content = 'Content of the blog post';
+            $post->save();
+
+            return $post;
+
+        }
+
+
 
 }

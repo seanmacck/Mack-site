@@ -32,7 +32,7 @@ class PostController extends Controller
 
     public function create()
     {
-        //$request->session()->reflash();                To display a message, if something was created or not!
+        //$request->session()->reFlash();               // To display a message, if something was created or not!
        return view('posts.create');
     }
 
